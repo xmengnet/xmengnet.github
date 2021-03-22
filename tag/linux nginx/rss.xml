@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>心夢博客</title>
+        <title>心夢博客 • Posts by &#34;linux nginx&#34; tag</title>
         <link>https://xmengnet.github.io</link>
         <description></description>
         <language>en</language>
@@ -73,123 +73,6 @@
 &lt;p&gt;参考网站：&lt;a href=&#34;https://www.ycmbcd.com/blog/html/15778576279282.html&#34;&gt;https://www.ycmbcd.com/blog/html/15778576279282.html&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;                https://www.jianshu.com/p/4466e0cd0bd1
 &lt;/code&gt;&lt;/pre&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://xmengnet.github.io/2021/03/22/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%BF%AE%E5%A4%8Dwindows%E5%BC%95%E5%AF%BC/</guid>
-            <title>双系统修复windows引导</title>
-            <link>https://xmengnet.github.io/2021/03/22/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%BF%AE%E5%A4%8Dwindows%E5%BC%95%E5%AF%BC/</link>
-            <category>linux,windows</category>
-            <pubDate>Mon, 22 Mar 2021 18:07:31 +0800</pubDate>
-            <description><![CDATA[ &lt;blockquote&gt;
-&lt;p&gt;最近尝试安装ArchLinux了，结果一时手贱把windows的esp也就是efi分区格式化了，试了各种办法修复都没成功，研究了一整天才在下午慢慢有了头绪，下面借鉴一些网上的资料讲解一下我的修复过程！&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&#34;一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。&#34;&gt;&lt;a href=&#34;#一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。&#34; class=&#34;headerlink&#34; title=&#34;一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。&#34;&gt;&lt;/a&gt;一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/20190426125151883.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
-&lt;p&gt;选择好语言之后点击“修复计算机”，然后在出现的页面中依次选择 疑难解答-&amp;gt;命令提示符 然后就可以在管理员的模式下进入cmd啦。&lt;/p&gt;
-&lt;p&gt;修复启动引导需要用到bcdboot命令以及diskpart工具，关于这两个命令具体是干什么的，我建议百度。&lt;/p&gt;
-&lt;h2 id=&#34;在这里科普一下UEFI引导系统的工作原理&#34;&gt;&lt;a href=&#34;#在这里科普一下UEFI引导系统的工作原理&#34; class=&#34;headerlink&#34; title=&#34;在这里科普一下UEFI引导系统的工作原理&#34;&gt;&lt;/a&gt;&lt;strong&gt;在这里科普一下UEFI引导系统的工作原理&lt;/strong&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;首先什么是&lt;/strong&gt;efi引导分区(esp或简称引导分区)？&lt;/p&gt;
-&lt;p&gt;该分区必须存在GPT磁盘中，用来存储efi引导文件，它采用fat32文件系统。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;efi长啥样（windows下）&lt;/p&gt;
-&lt;p&gt;主要文件的结构是这样的：&lt;/p&gt;
-&lt;p&gt;efi\boot\bootx64.efi&lt;/p&gt;
-&lt;p&gt;efi\microsoft\boot\bcd&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;efi工作流程？（windows下）&lt;/p&gt;
-&lt;p&gt;uefi 在bios启动时，自动查找硬盘下引导分区的bootx64.efi，然后由bootx64.efi引导efi下的bcd文件，由bcd引导指定系统文件（一般为c:\windows\system32\winload.efi）&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;既然是要修复启动引导，那么说明他以前是可以用的！因此需要找到以前的引导存放的位置（windows的efi分区），这里我使用diskpart工具。&lt;/p&gt;
-&lt;p&gt;用到的命令是list和sel，分别是列出和选择。&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;list disk&lt;/th&gt;
-&lt;th&gt;列出所有挂载磁盘&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;list par&lt;/td&gt;
-&lt;td&gt;列出当前磁盘分区&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;sel disk n&lt;/td&gt;
-&lt;td&gt;选择磁盘 n是编号&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;sel par n&lt;/td&gt;
-&lt;td&gt;同理&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt; 找windows的引导分区，大小一般都是一两百MB，找到之后选择它。我电脑是双硬盘，一块256GSSD一块1THDD，系统是装在SSD上的，同时这块SSD也是GPT磁盘，因此EFI分区肯定在它上面，然后列出它的分区，找到引导分区位置。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/20190426125825823.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
-&lt;p&gt;找到之后用assign命令给这个分区分配一个盘符，以便修复它，我这里给他一个o，然后就可以退出diskpart工具啦。(如果提示不是内部命令，请先输入 diskpart )&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/20190426130022652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
-&lt;p&gt;引导的本质就是告诉电脑，要启动的系统在哪。修复它，要把启动需要的引导文件写到efi分区。前面已经知道efi分区的位置了，还给他分配了盘符o，因此要修复它还需要知道windows的系统在哪里，通常是c盘，也就是c:\windows&lt;/p&gt;
-&lt;p&gt;现在需要用bcdboot命令来修复这个分区&lt;/p&gt;
-&lt;p&gt;请按照格式输入下面的指令。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/20190426132015674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
-&lt;p&gt;经常bcdboot后面的c:\windows是有问题的，磁盘正常情况下是启动盘，但这里系统经常把启动盘分到D盘，最好运行dir命令查看一下。&lt;/p&gt;
-&lt;p&gt;格式 &lt;code&gt;dir c:&lt;/code&gt; &lt;code&gt;dir d:&lt;/code&gt; 这样的格式，我的启动盘就被系统分为了D盘。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/20190426130652883.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
-&lt;p&gt;执行之后，提示 “成功创建启动文件” 就表示引导添加成功了，exit退出命令行，随后点击退出并继续。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/2019042613080070.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
-&lt;p&gt;重新开启，就可以看到熟悉的画面~&lt;/p&gt;
-&lt;p&gt;参考：&lt;a href=&#34;https://blog.csdn.net/A_Sen_A/article/details/89545311&#34;&gt;https://blog.csdn.net/A_Sen_A/article/details/89545311&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;修复完之后发现我的ArchLinux没法引导了，只能用开机的F9选择进入了，气得我直接重装Arch了，以后操作之前一定要备份！！！！别人七夕都陪异性朋友过，我陪电脑过了一天，一直到晚上十一点半。。。。。&lt;/p&gt;
-&lt;p&gt;&lt;img  src=&#34;https://i.loli.net/2020/08/27/oX7ak6PgpTWxHFA.png&#34;  &gt;&lt;span class=&#34;image-caption&#34;&gt;Windows.png&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img  src=&#34;https://i.loli.net/2020/08/27/7XjkYDTHGzbZdSO.jpg&#34;  &gt;&lt;span class=&#34;image-caption&#34;&gt;Arch Linux&lt;/span&gt;&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://xmengnet.github.io/2021/03/22/%E5%BE%88%E6%83%B3%E5%8A%AA%E5%8A%9B%E6%8B%BC%E5%91%BD%E4%B8%80%E6%8A%8A%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89%E5%8A%A8%E5%8A%9B%E5%9D%9A%E6%8C%81%E4%B8%8B%E5%8E%BB%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/</guid>
-            <title>很想努力拼命一把，但没有动力坚持下去怎么办？</title>
-            <link>https://xmengnet.github.io/2021/03/22/%E5%BE%88%E6%83%B3%E5%8A%AA%E5%8A%9B%E6%8B%BC%E5%91%BD%E4%B8%80%E6%8A%8A%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89%E5%8A%A8%E5%8A%9B%E5%9D%9A%E6%8C%81%E4%B8%8B%E5%8E%BB%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/</link>
-            <pubDate>Mon, 22 Mar 2021 16:50:57 +0800</pubDate>
-            <description><![CDATA[ &lt;p&gt;作者：KnowYourself&lt;br&gt;链接：&lt;a href=&#34;https://www.zhihu.com/question/279782476/answer/884327988&#34;&gt;https://www.zhihu.com/question/279782476/answer/884327988&lt;/a&gt;&lt;br&gt;来源：知乎&lt;br&gt;著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。&lt;/p&gt;
-&lt;p&gt;&lt;img  src=&#34;https://blog-1256425412.cos.ap-chengdu.myqcloud.com/blog/download.jpg&#34;  &gt;&lt;span class=&#34;image-caption&#34;&gt;download&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;遗憾的是，我们想要的生活，通常都没有办法通过“努力一把”就会实现&lt;/strong&gt;。事实上，世界上很多的美好珍贵、有价值的理想和渴望都无法一蹴而就。&lt;/p&gt;
-&lt;p&gt;或许题主需要做的，是调整自己的思维，不要陷入“拼命努力一把就能实现生活的改变”的想法之中，&lt;strong&gt;与此纠结能否拼命努力一把，不如去想想如何在更长的时间里、通过持之以恒的努力来实现自己的梦想，改变自己的人生&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;因为对大部分人来说，更能带来人生改变的是自律的能力。自律可以帮助我们更自主进行目标管理，克服拖延行为，养成努力的、同时适合自己的生活态度和行为习惯。&lt;/p&gt;
-&lt;h2 id=&#34;为什么自律是重要的？&#34;&gt;&lt;a href=&#34;#为什么自律是重要的？&#34; class=&#34;headerlink&#34; title=&#34;为什么自律是重要的？&#34;&gt;&lt;/a&gt;&lt;strong&gt;为什么自律是重要的？&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;研究自律的心理学家罗伊·鲍迈斯特描述了实现目标的三个必要组成部分：首先，建立改变的动机并设定一个明确的目标；第二，监控你朝着这个目标的行为；第三个要素是意志力，不管你的目标是减肥、戒烟、多学习还是少逛淘宝，自律都是达到目标的关键。&lt;/p&gt;
-&lt;p&gt;人们通过自觉、努力的自我调节，运用冷静的行为认知系统，而不是激烈的情绪系统，控制冲动、情绪、欲望和行为，抵制短期诱惑，从实现更高更有意义的目标中获得长期的满足。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1.自律是有所成就的关键因素之一&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;如果你想在生活和事业中有所成就，就一定要有目标要实现，有梦想要追逐。只有一部分人能够到达理想的彼岸，那么决定因素是运气、天赋、环境还是努力工作呢？对于每个个体，答案可以是一个或多个因素的组合。但是，在成千上万的成功法则中，自律往往都是不能缺少的。这世界上有许多事情你无法控制，但做到自律，你至少能对自己的生活掌握主动权。&lt;/p&gt;
-&lt;p&gt;当你面对困难的时候，自律让你坚持下去，困难的日子会更容易度过。自律给你坚持自己决定的力量。一个自律的人可以看到大局并坚持目标，为了更大的、长远的收益而拒绝诱惑、即时的快乐和满足。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2.自律让人更快乐、对生活更满意&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;当你面对着一个热巧克力圣代，或者想着睡个懒觉而不是去健身房时，你可能很难相信这一点。但研究表明，自律的人更快乐。当你在内心培养自律时，你会有更高的自尊和自信，从而成为更快乐的人。&lt;strong&gt;因为自律意味着自我控制，但并非对自己苛刻，过一种受限的生活，也不代表你要放弃你喜欢的一切、不再享受乐趣和放松。&lt;/strong&gt;你需要学习如何集中你的思想和精力在你的目标上，并坚持直到它们实现。&lt;/p&gt;
-&lt;h2 id=&#34;如何习得自律的生活方式？&#34;&gt;&lt;a href=&#34;#如何习得自律的生活方式？&#34; class=&#34;headerlink&#34; title=&#34;如何习得自律的生活方式？&#34;&gt;&lt;/a&gt;&lt;strong&gt;如何习得自律的生活方式？&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;你不需要沮丧或懊恼，自律不是天生的，而是一种后天习得的技能。&lt;/strong&gt;就像通过有规律的锻炼来增强肌肉一样，有规律地刻意锻炼自律的能力，就可以随着时间的推移得到提升。如果你想过上心中想要的生活，不妨从现在开始培养自律的能力，一切都还来得及。下面我们来介绍一些技巧：&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1.远离或避免诱惑&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;我们都愿意相信自己有足够的意志力来抵制哪怕是最诱人的诱惑，但只要我们存在一些弱点，我们就会屈服于诱惑。让这些诱惑难以接近我们，可能是增强自律的关键。如果你逛淘宝成瘾，那就在工作的时候关掉网络。如果你去购物中心时忍不住超支，那就把信用卡留在家里，只带一定数量的现金。&lt;/p&gt;
-&lt;p&gt;你可以从深入了解自己开始。有时候我们很难抵制本能的渴望，所以要清楚自己抵抗力低的地方，并且琢磨如何能避免这些情况。如&lt;strong&gt;果你觉得给自己施加压力对你没有好处，可以给自己营造一个鼓励自律的环境，而不是破坏自律的环境。&lt;/strong&gt;排除诱惑，让自己置身于抚慰人心和鼓舞士气的事物之中，比如激励人心的便利贴notes和你想要实现的目标的屏保。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2.为自己制定一个执行计划&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;心理学家使用一种叫做“执行意图”的技巧来增强意志力。这种意图以“如果-那么”的形式出现，帮助人们为可能挫败他们决心的情况做计划。你可以给自己一个计划来处理一个你知道可能会面对的潜在困难情况。例如，你正在努力吃得更健康，但你正在去一个派对的路上，那里会提供食物。在你离开之前，告诉自己，与其一头扎进一盘奶酪和饼干，不如端一杯水，专注于社交。制定一个计划可以帮助你在这种情况下持有肯定的心态和自我控制能力。 &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3.养成专注于单一目标的习惯&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;在一个领域的消耗会减少在其他领域的意志力储备，所以一次专注于一个目标比一次完成多个目标更有效。不要试图一次改变所有的事情，始终如一地专注于做一件事，并在心中以此为目标掌握自律。如果你想保持体形，那就从每天锻炼10到15分钟开始。如果你想养成更好的睡眠习惯，那就从每晚早睡15分钟开始。如果你想吃得更健康，那就在前一天晚上为自己准备好午餐，第二天早上带走。&lt;/p&gt;
-&lt;p&gt;刚开始的时候，养成自律和养成新习惯可能会让你退缩，尤其是当你专注于手头的整个庞杂而繁重的任务时。&lt;strong&gt;为了避免害怕情绪，保持每一步简单明确。制定清晰的计划，列出实现目标的行动步骤。注意，把目标分成小的、可行的步骤。&lt;/strong&gt;采取这些小而确切的步骤。最后，当一件事达成，你就可以添加下一个目标到你的心愿列表。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4.想象长期的回报&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;当你专注于长期收益时，你就不太容易屈服于诱惑。屈服于眼下的诱惑可能会让你现在感到快乐，但长期的快乐和满足使你明确自己需要放弃即时的满足。想象自己实现了目标，每天都通过自律获得了一些回报。&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://xmengnet.github.io/2021/03/22/hello-world/</guid>
-            <title>Hello World</title>
-            <link>https://xmengnet.github.io/2021/03/22/hello-world/</link>
-            <pubDate>Mon, 22 Mar 2021 16:43:15 +0800</pubDate>
-            <description><![CDATA[ &lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;Quick-Start&#34;&gt;&lt;a href=&#34;#Quick-Start&#34; class=&#34;headerlink&#34; title=&#34;Quick Start&#34;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&#34;Create-a-new-post&#34;&gt;&lt;a href=&#34;#Create-a-new-post&#34; class=&#34;headerlink&#34; title=&#34;Create a new post&#34;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs bash&#34;&gt;$ hexo new &lt;span class=&#34;hljs-string&#34;&gt;&amp;quot;My New Post&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/writing.html&#34;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;Run-server&#34;&gt;&lt;a href=&#34;#Run-server&#34; class=&#34;headerlink&#34; title=&#34;Run server&#34;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs bash&#34;&gt;$ hexo server&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/server.html&#34;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;Generate-static-files&#34;&gt;&lt;a href=&#34;#Generate-static-files&#34; class=&#34;headerlink&#34; title=&#34;Generate static files&#34;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs bash&#34;&gt;$ hexo generate&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/generating.html&#34;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;Deploy-to-remote-sites&#34;&gt;&lt;a href=&#34;#Deploy-to-remote-sites&#34; class=&#34;headerlink&#34; title=&#34;Deploy to remote sites&#34;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs bash&#34;&gt;$ hexo deploy&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

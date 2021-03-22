@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Arch搭建Nginx+MariaDB+PHP及其配置 - 心夢博客</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="写在前面 最近在阿里云上新买了一个服务器，想换个风格，...">
+  <meta name="author" content="John Doe">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_s6x2xcokxrl.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: true,
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: '/images/theme/loading.gif'
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '[object Object]',
+          api: ''
+        },
+        motto: {
+          default: '我在开了灯的床头下，想问问自己的心啊。',
+          typing: true,
+          api: 'https://v2.jinrishici.com/one.json',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+
+
+  <nav class="navbar" style="">
+    <div class="left">
+      
+        <i class="iconfont iconqrcode j-navbar-qrcode"></i>
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+    </div>
+    <div class="center">Arch搭建Nginx+MariaDB+PHP及其配置</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+      <div id="qrcode-navbar"></div>
+    
+  </nav>
+
+  
+
+<nav class="menu">
+  <div class="menu-wrap">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/galleries/ " class="underline "> 摄影</a>
+      </li><li class="menu-item">
+        <a href="/archives/ " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags/ " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/ " class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://i.bmp.ovh/imgs/2021/02/5cd1c7b6be031432.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">Arch搭建Nginx+MariaDB+PHP及其配置</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>March 22, 2021</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2503</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p> 最近在阿里云上新买了一个服务器，想换个风格，不想使用<code>Centos</code>或者<code>Debian</code>，想试试<code>Arch</code>做服务器，由于阿里云没有<code>Arch</code>系统，所以先在<code>Github</code>上使用<a target="_blank" rel="noopener" href="https://github.com/xmengnet/vps2arch">vps2arch</a>转换成Arch系统。</p>
+<p>使用方法也简单，下载<code>vps2arch</code>那个文件，然后使用</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">chmod +x vps2arch2<br><span class="hljs-string">./vps2arch2</span><br></code></pre></td></tr></table></figure>
+
+<p>执行后就可以替换成Arch系统，<strong>注意：本人使用的是阿里云的<code>Debian </code>9.9系统，8.x的安装<code>Arch</code>失败。</strong></p>
+<blockquote>
+<p>如果在<code>vps</code>上下载<code>github</code>文件太慢，可以先下载在本地，然后使用<code>rsync</code>服务上传到服务器，下面是<code>rsync</code>的用法：</p>
+<p><code>rsync -P -r 你要上传文件的位置如：/home/liyp/Desktop/vps2arch root@ip地址:文件路径如/root</code></p>
+</blockquote>
+<p>安装完成记得使用快照备份一下数据，防止系统崩溃导致一切都要重来。</p>
+<p>系统搞好后就开始步入正题了：</p>
+<h2 id="1、安装相关软件"><a href="#1、安装相关软件" class="headerlink" title="1、安装相关软件"></a>1、安装相关软件</h2><p>以下操作都在root用户下执行</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">pacman -S nginx php php-fpm mariadb</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2、配置"><a href="#2、配置" class="headerlink" title="2、配置"></a>2、配置</h2><h4 id="配置-MariaDB-数据库"><a href="#配置-MariaDB-数据库" class="headerlink" title="配置 MariaDB 数据库"></a>配置 <code>MariaDB</code> 数据库</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql<br></code></pre></td></tr></table></figure>
+
+<h4 id="配置MySQL-root密码，根据自己需求选择。"><a href="#配置MySQL-root密码，根据自己需求选择。" class="headerlink" title="配置MySQL root密码，根据自己需求选择。"></a>配置MySQL root密码，根据自己需求选择。</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql_secure_installation<br></code></pre></td></tr></table></figure>
+
+<h4 id="配置-MySQL-utf8mb4-字符集"><a href="#配置-MySQL-utf8mb4-字符集" class="headerlink" title="配置 MySQL utf8mb4 字符集"></a>配置 MySQL utf8mb4 字符集</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/my</span>.cnf<br></code></pre></td></tr></table></figure>
+
+<h4 id="在末尾追加"><a href="#在末尾追加" class="headerlink" title="在末尾追加"></a>在末尾追加</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[client]</span><br><span class="hljs-attr">default-character-set</span>=utf8mb4<br><span class="hljs-section">[mysql]</span><br><span class="hljs-attr">default-character-set</span>=utf8mb4<br><span class="hljs-section">[mysqld]</span><br><span class="hljs-attr">character-set-client-handshake</span> = <span class="hljs-literal">FALSE</span><br><span class="hljs-attr">character-set-server</span>=utf8mb4<br><span class="hljs-attr">collation-server</span> = utf8mb4_unicode_ci<br><span class="hljs-attr">init_connect</span>=<span class="hljs-string">&#x27;SET NAMES utf8mb4&#x27;</span><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="配置-Nginx-支持-PHP"><a href="#配置-Nginx-支持-PHP" class="headerlink" title="配置 Nginx 支持 PHP"></a>配置 <code>Nginx</code> 支持 <code>PHP</code></h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs awk">location / &#123;<br>    root   <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/nginx/</span>html;<br>    index  index.php index.html index.htm;<br>&#125;<br><br>location ~ \.php$ &#123;<br>    fastcgi_pass   unix:<span class="hljs-regexp">/run/</span>php-fpm/php-fpm.sock;<br>    fastcgi_index  index.php;<br>    fastcgi_param  SCRIPT_FILENAME  <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/nginx/</span>html<span class="hljs-variable">$fastcgi_script_name</span>;<br>    include        fastcgi_params;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="3、服务测试"><a href="#3、服务测试" class="headerlink" title="3、服务测试"></a>3、服务测试</h1><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c">php-fpm -t  <span class="hljs-meta">#查看 PHP 配置是否正确</span><br>nginx -t <span class="hljs-meta">#查看nginx服务配置是否正确</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="4、启动"><a href="#4、启动" class="headerlink" title="4、启动"></a>4、启动</h1><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs maxima">systemctl <span class="hljs-built_in">restart</span> php-fpm<br><br>systemctl <span class="hljs-built_in">restart</span> nginx<br><br>systemctl <span class="hljs-built_in">restart</span> mysqld<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="5、配置开机启动"><a href="#5、配置开机启动" class="headerlink" title="5、配置开机启动"></a>5、配置开机启动</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">systemctl <span class="hljs-builtin-name">enable</span> nginx<br>systemctl <span class="hljs-builtin-name">enable</span> mysqld<br>systemctl <span class="hljs-builtin-name">enable</span> php-fpm<br></code></pre></td></tr></table></figure>
+
+<h1 id="6、测试"><a href="#6、测试" class="headerlink" title="6、测试"></a>6、测试</h1><h4 id="Nginx-PHP-环境测试"><a href="#Nginx-PHP-环境测试" class="headerlink" title="Nginx+PHP 环境测试"></a>Nginx+PHP 环境测试</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/nginx/</span>html/index.php<br></code></pre></td></tr></table></figure>
+
+<p>输入：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    phpinfo();<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>网页打开：<code>http://服务器ip地址 </code></p>
+<p>如果出现 <code>PHPinfo</code> 页面则安装成功。</p>
+<p><strong>注意：建议测试ip的时候在浏览器的隐私界面测试，防止缓存干扰</strong></p>
+<h1 id="7、卸载"><a href="#7、卸载" class="headerlink" title="7、卸载"></a>7、卸载</h1><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">pacman -Rs nginx php-fpm mariadb</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="8、数据库相关操作"><a href="#8、数据库相关操作" class="headerlink" title="8、数据库相关操作"></a>8、数据库相关操作</h1><p>如果你不想使用root操作数据库，你可以创建一个用户和数据库，把数据库的所有操作权限授予新创建的用户。</p>
+<h4 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h4><p>命令:**CREATE USER ‘username’@’host’ IDENTIFIED BY ‘password’; **</p>
+<p>说明:<br><code>username</code>- 你将创建的用户名,<br> <code>host </code>- 指定该用户在哪个主机上可以登陆,如果是本地用户可用<code>localhost</code>, 如果想让该用户可以从任意远程主机登陆,可以使用通配符%.<br> <code>password</code> - 该用户的登陆密码,密码可以为空,如果为空则该用户可以不需要密码登陆服务器.</p>
+<p>例子：</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;blog&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;123456&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<h4 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h4><p>命令:</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">ON</span> databasename.tablename <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;username&#x27;</span>@<span class="hljs-string">&#x27;host&#x27;</span> <br></code></pre></td></tr></table></figure>
+
+
+<p> 说明:<code> privileges</code> - 用户的操作权限,如SELECT , INSERT , UPDATE 等.如果要授予所的权限则使用ALL.;<br> <code>databasename</code> - 数据库名,<br> <code>tablename</code>-表名,<br> 如果要授予该用户对所有数据库和表的相应操作权限则可用 * 表示, 如 <em>.</em></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> <span class="hljs-keyword">ON</span> blog.* <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;blog&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br>flush <span class="hljs-keyword">privileges</span>; #刷新权限<br></code></pre></td></tr></table></figure>
+
+<p>建议把网站相关的都放到<code>/srv</code>文件夹下，我网站的<code>/srv</code>目录如下图：</p>
+<p><img    class="lazyload" data-original="https://i.bmp.ovh/imgs/2021/02/5cd1c7b6be031432.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">/srv目录</span></p>
+<p>参考网站：<a target="_blank" rel="noopener" href="https://www.ycmbcd.com/blog/html/15778576279282.html">https://www.ycmbcd.com/blog/html/15778576279282.html</a></p>
+<pre><code>                https://www.jianshu.com/p/4466e0cd0bd1
+</code></pre>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>John Doe</li>
+    <li><strong>本文链接：</strong><a href="https://xmengnet.github.io/2021/03/22/Arch%E6%90%AD%E5%BB%BANginx-MariaDB-PHP%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/index.html" title="https:&#x2F;&#x2F;xmengnet.github.io&#x2F;2021&#x2F;03&#x2F;22&#x2F;Arch%E6%90%AD%E5%BB%BANginx-MariaDB-PHP%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE&#x2F;index.html">https:&#x2F;&#x2F;xmengnet.github.io&#x2F;2021&#x2F;03&#x2F;22&#x2F;Arch%E6%90%AD%E5%BB%BANginx-MariaDB-PHP%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Nginx/" rel="tag">Linux Nginx</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a></a>
+    <a href="/2021/03/22/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%BF%AE%E5%A4%8Dwindows%E5%BC%95%E5%AF%BC/">双系统修复windows引导<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6"><span class="toc-text">1、安装相关软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE"><span class="toc-text">2、配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E6%9C%8D%E5%8A%A1%E6%B5%8B%E8%AF%95"><span class="toc-text">3、服务测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E5%90%AF%E5%8A%A8"><span class="toc-text">4、启动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81%E9%85%8D%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8"><span class="toc-text">5、配置开机启动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">6、测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7%E3%80%81%E5%8D%B8%E8%BD%BD"><span class="toc-text">7、卸载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-text">8、数据库相关操作</span></a>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=794508986 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/izhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:794508986@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
