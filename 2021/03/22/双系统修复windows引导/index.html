@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>双系统修复windows引导 - 心夢博客</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="
+最近尝试安装ArchLinux了，结果一时手贱把wi...">
+  <meta name="author" content="John Doe">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_s6x2xcokxrl.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: true,
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: '/images/theme/loading.gif'
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '[object Object]',
+          api: ''
+        },
+        motto: {
+          default: '我在开了灯的床头下，想问问自己的心啊。',
+          typing: true,
+          api: 'https://v2.jinrishici.com/one.json',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+
+
+  <nav class="navbar" style="">
+    <div class="left">
+      
+        <i class="iconfont iconqrcode j-navbar-qrcode"></i>
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+    </div>
+    <div class="center">双系统修复windows引导</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+      <div id="qrcode-navbar"></div>
+    
+  </nav>
+
+  
+
+<nav class="menu">
+  <div class="menu-wrap">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/galleries/ " class="underline "> 摄影</a>
+      </li><li class="menu-item">
+        <a href="/archives/ " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags/ " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/ " class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://i.loli.net/2020/08/27/oX7ak6PgpTWxHFA.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">双系统修复windows引导</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>March 22, 2021</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1506</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <blockquote>
+<p>最近尝试安装ArchLinux了，结果一时手贱把windows的esp也就是efi分区格式化了，试了各种办法修复都没成功，研究了一整天才在下午慢慢有了头绪，下面借鉴一些网上的资料讲解一下我的修复过程！</p>
+</blockquote>
+<h4 id="一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。"><a href="#一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。" class="headerlink" title="一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。"></a>一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。</h4><p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/20190426125151883.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>选择好语言之后点击“修复计算机”，然后在出现的页面中依次选择 疑难解答-&gt;命令提示符 然后就可以在管理员的模式下进入cmd啦。</p>
+<p>修复启动引导需要用到bcdboot命令以及diskpart工具，关于这两个命令具体是干什么的，我建议百度。</p>
+<h2 id="在这里科普一下UEFI引导系统的工作原理"><a href="#在这里科普一下UEFI引导系统的工作原理" class="headerlink" title="在这里科普一下UEFI引导系统的工作原理"></a><strong>在这里科普一下UEFI引导系统的工作原理</strong></h2><ul>
+<li><p><strong>首先什么是</strong>efi引导分区(esp或简称引导分区)？</p>
+<p>该分区必须存在GPT磁盘中，用来存储efi引导文件，它采用fat32文件系统。</p>
+</li>
+<li><p>efi长啥样（windows下）</p>
+<p>主要文件的结构是这样的：</p>
+<p>efi\boot\bootx64.efi</p>
+<p>efi\microsoft\boot\bcd</p>
+</li>
+<li><p>efi工作流程？（windows下）</p>
+<p>uefi 在bios启动时，自动查找硬盘下引导分区的bootx64.efi，然后由bootx64.efi引导efi下的bcd文件，由bcd引导指定系统文件（一般为c:\windows\system32\winload.efi）</p>
+</li>
+</ul>
+<p>既然是要修复启动引导，那么说明他以前是可以用的！因此需要找到以前的引导存放的位置（windows的efi分区），这里我使用diskpart工具。</p>
+<p>用到的命令是list和sel，分别是列出和选择。</p>
+<table>
+<thead>
+<tr>
+<th>list disk</th>
+<th>列出所有挂载磁盘</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>list par</td>
+<td>列出当前磁盘分区</td>
+</tr>
+<tr>
+<td>sel disk n</td>
+<td>选择磁盘 n是编号</td>
+</tr>
+<tr>
+<td>sel par n</td>
+<td>同理</td>
+</tr>
+</tbody></table>
+<p> 找windows的引导分区，大小一般都是一两百MB，找到之后选择它。我电脑是双硬盘，一块256GSSD一块1THDD，系统是装在SSD上的，同时这块SSD也是GPT磁盘，因此EFI分区肯定在它上面，然后列出它的分区，找到引导分区位置。</p>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/20190426125825823.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>找到之后用assign命令给这个分区分配一个盘符，以便修复它，我这里给他一个o，然后就可以退出diskpart工具啦。(如果提示不是内部命令，请先输入 diskpart )</p>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/20190426130022652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>引导的本质就是告诉电脑，要启动的系统在哪。修复它，要把启动需要的引导文件写到efi分区。前面已经知道efi分区的位置了，还给他分配了盘符o，因此要修复它还需要知道windows的系统在哪里，通常是c盘，也就是c:\windows</p>
+<p>现在需要用bcdboot命令来修复这个分区</p>
+<p>请按照格式输入下面的指令。</p>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/20190426132015674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>经常bcdboot后面的c:\windows是有问题的，磁盘正常情况下是启动盘，但这里系统经常把启动盘分到D盘，最好运行dir命令查看一下。</p>
+<p>格式 <code>dir c:</code> <code>dir d:</code> 这样的格式，我的启动盘就被系统分为了D盘。</p>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/20190426130652883.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>执行之后，提示 “成功创建启动文件” 就表示引导添加成功了，exit退出命令行，随后点击退出并继续。</p>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/2019042613080070.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>重新开启，就可以看到熟悉的画面~</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/A_Sen_A/article/details/89545311">https://blog.csdn.net/A_Sen_A/article/details/89545311</a></p>
+<p>修复完之后发现我的ArchLinux没法引导了，只能用开机的F9选择进入了，气得我直接重装Arch了，以后操作之前一定要备份！！！！别人七夕都陪异性朋友过，我陪电脑过了一天，一直到晚上十一点半。。。。。</p>
+<p><img    class="lazyload" data-original="https://i.loli.net/2020/08/27/oX7ak6PgpTWxHFA.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">Windows.png</span></p>
+<p><img    class="lazyload" data-original="https://i.loli.net/2020/08/27/7XjkYDTHGzbZdSO.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">Arch Linux</span></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>John Doe</li>
+    <li><strong>本文链接：</strong><a href="https://xmengnet.github.io/2021/03/22/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%BF%AE%E5%A4%8Dwindows%E5%BC%95%E5%AF%BC/index.html" title="https:&#x2F;&#x2F;xmengnet.github.io&#x2F;2021&#x2F;03&#x2F;22&#x2F;%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%BF%AE%E5%A4%8Dwindows%E5%BC%95%E5%AF%BC&#x2F;index.html">https:&#x2F;&#x2F;xmengnet.github.io&#x2F;2021&#x2F;03&#x2F;22&#x2F;%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%BF%AE%E5%A4%8Dwindows%E5%BC%95%E5%AF%BC&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-windows/" rel="tag">linux,windows</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a></a>
+    <a href="/2021/03/22/%E5%BE%88%E6%83%B3%E5%8A%AA%E5%8A%9B%E6%8B%BC%E5%91%BD%E4%B8%80%E6%8A%8A%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89%E5%8A%A8%E5%8A%9B%E5%9D%9A%E6%8C%81%E4%B8%8B%E5%8E%BB%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/">很想努力拼命一把，但没有动力坚持下去怎么办？<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E8%BF%99%E9%87%8C%E7%A7%91%E6%99%AE%E4%B8%80%E4%B8%8BUEFI%E5%BC%95%E5%AF%BC%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">在这里科普一下UEFI引导系统的工作原理</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=794508986 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/izhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:794508986@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

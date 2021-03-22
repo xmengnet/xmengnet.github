@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://xmengnet.github.io</id>
+    <title>心夢博客 • Posts by &#34;linux,windows&#34; tag</title>
+    <link href="https://xmengnet.github.io" />
+    <updated>2021-03-22T10:07:31.000Z</updated>
+    <category term="linux,windows" />
+    <entry>
+        <id>https://xmengnet.github.io/2021/03/22/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%BF%AE%E5%A4%8Dwindows%E5%BC%95%E5%AF%BC/</id>
+        <title>双系统修复windows引导</title>
+        <link rel="alternate" href="https://xmengnet.github.io/2021/03/22/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%BF%AE%E5%A4%8Dwindows%E5%BC%95%E5%AF%BC/"/>
+        <content type="html">&lt;blockquote&gt;
+&lt;p&gt;最近尝试安装ArchLinux了，结果一时手贱把windows的esp也就是efi分区格式化了，试了各种办法修复都没成功，研究了一整天才在下午慢慢有了头绪，下面借鉴一些网上的资料讲解一下我的修复过程！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。&#34;&gt;&lt;a href=&#34;#一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。&#34; class=&#34;headerlink&#34; title=&#34;一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。&#34;&gt;&lt;/a&gt;一、首先保证你的bios里的启动模式是UEFI模式（这不是废话么），插入U盘启动后手动选择启动项，选择你的win10启动U盘。顺利进入windows安装界面。&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/20190426125151883.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
+&lt;p&gt;选择好语言之后点击“修复计算机”，然后在出现的页面中依次选择 疑难解答-&amp;gt;命令提示符 然后就可以在管理员的模式下进入cmd啦。&lt;/p&gt;
+&lt;p&gt;修复启动引导需要用到bcdboot命令以及diskpart工具，关于这两个命令具体是干什么的，我建议百度。&lt;/p&gt;
+&lt;h2 id=&#34;在这里科普一下UEFI引导系统的工作原理&#34;&gt;&lt;a href=&#34;#在这里科普一下UEFI引导系统的工作原理&#34; class=&#34;headerlink&#34; title=&#34;在这里科普一下UEFI引导系统的工作原理&#34;&gt;&lt;/a&gt;&lt;strong&gt;在这里科普一下UEFI引导系统的工作原理&lt;/strong&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;首先什么是&lt;/strong&gt;efi引导分区(esp或简称引导分区)？&lt;/p&gt;
+&lt;p&gt;该分区必须存在GPT磁盘中，用来存储efi引导文件，它采用fat32文件系统。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;efi长啥样（windows下）&lt;/p&gt;
+&lt;p&gt;主要文件的结构是这样的：&lt;/p&gt;
+&lt;p&gt;efi\boot\bootx64.efi&lt;/p&gt;
+&lt;p&gt;efi\microsoft\boot\bcd&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;efi工作流程？（windows下）&lt;/p&gt;
+&lt;p&gt;uefi 在bios启动时，自动查找硬盘下引导分区的bootx64.efi，然后由bootx64.efi引导efi下的bcd文件，由bcd引导指定系统文件（一般为c:\windows\system32\winload.efi）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;既然是要修复启动引导，那么说明他以前是可以用的！因此需要找到以前的引导存放的位置（windows的efi分区），这里我使用diskpart工具。&lt;/p&gt;
+&lt;p&gt;用到的命令是list和sel，分别是列出和选择。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;list disk&lt;/th&gt;
+&lt;th&gt;列出所有挂载磁盘&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;list par&lt;/td&gt;
+&lt;td&gt;列出当前磁盘分区&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;sel disk n&lt;/td&gt;
+&lt;td&gt;选择磁盘 n是编号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;sel par n&lt;/td&gt;
+&lt;td&gt;同理&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt; 找windows的引导分区，大小一般都是一两百MB，找到之后选择它。我电脑是双硬盘，一块256GSSD一块1THDD，系统是装在SSD上的，同时这块SSD也是GPT磁盘，因此EFI分区肯定在它上面，然后列出它的分区，找到引导分区位置。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/20190426125825823.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
+&lt;p&gt;找到之后用assign命令给这个分区分配一个盘符，以便修复它，我这里给他一个o，然后就可以退出diskpart工具啦。(如果提示不是内部命令，请先输入 diskpart )&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/20190426130022652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
+&lt;p&gt;引导的本质就是告诉电脑，要启动的系统在哪。修复它，要把启动需要的引导文件写到efi分区。前面已经知道efi分区的位置了，还给他分配了盘符o，因此要修复它还需要知道windows的系统在哪里，通常是c盘，也就是c:\windows&lt;/p&gt;
+&lt;p&gt;现在需要用bcdboot命令来修复这个分区&lt;/p&gt;
+&lt;p&gt;请按照格式输入下面的指令。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/20190426132015674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
+&lt;p&gt;经常bcdboot后面的c:\windows是有问题的，磁盘正常情况下是启动盘，但这里系统经常把启动盘分到D盘，最好运行dir命令查看一下。&lt;/p&gt;
+&lt;p&gt;格式 &lt;code&gt;dir c:&lt;/code&gt; &lt;code&gt;dir d:&lt;/code&gt; 这样的格式，我的启动盘就被系统分为了D盘。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/20190426130652883.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
+&lt;p&gt;执行之后，提示 “成功创建启动文件” 就表示引导添加成功了，exit退出命令行，随后点击退出并继续。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/2019042613080070.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FfU2VuX0E=,size_16,color_FFFFFF,t_70&#34;&gt;&lt;/p&gt;
+&lt;p&gt;重新开启，就可以看到熟悉的画面~&lt;/p&gt;
+&lt;p&gt;参考：&lt;a href=&#34;https://blog.csdn.net/A_Sen_A/article/details/89545311&#34;&gt;https://blog.csdn.net/A_Sen_A/article/details/89545311&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;修复完之后发现我的ArchLinux没法引导了，只能用开机的F9选择进入了，气得我直接重装Arch了，以后操作之前一定要备份！！！！别人七夕都陪异性朋友过，我陪电脑过了一天，一直到晚上十一点半。。。。。&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://i.loli.net/2020/08/27/oX7ak6PgpTWxHFA.png&#34;  &gt;&lt;span class=&#34;image-caption&#34;&gt;Windows.png&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://i.loli.net/2020/08/27/7XjkYDTHGzbZdSO.jpg&#34;  &gt;&lt;span class=&#34;image-caption&#34;&gt;Arch Linux&lt;/span&gt;&lt;/p&gt;
+</content>
+        <category term="linux,windows" />
+        <updated>2021-03-22T10:07:31.000Z</updated>
+    </entry>
+</feed>
