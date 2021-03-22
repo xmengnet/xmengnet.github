@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>Hexo</title>
-        <link>http://example.com</link>
+        <title>心夢博客</title>
+        <link>https://xmengnet.github.io</link>
         <description></description>
         <language>en</language>
         <pubDate>Mon, 22 Mar 2021 16:50:57 +0800</pubDate>
         <lastBuildDate>Mon, 22 Mar 2021 16:50:57 +0800</lastBuildDate>
         <item>
-            <guid isPermalink="true">http://example.com/2021/03/22/%E5%BE%88%E6%83%B3%E5%8A%AA%E5%8A%9B%E6%8B%BC%E5%91%BD%E4%B8%80%E6%8A%8A%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89%E5%8A%A8%E5%8A%9B%E5%9D%9A%E6%8C%81%E4%B8%8B%E5%8E%BB%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/</guid>
+            <guid isPermalink="true">https://xmengnet.github.io/2021/03/22/%E5%BE%88%E6%83%B3%E5%8A%AA%E5%8A%9B%E6%8B%BC%E5%91%BD%E4%B8%80%E6%8A%8A%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89%E5%8A%A8%E5%8A%9B%E5%9D%9A%E6%8C%81%E4%B8%8B%E5%8E%BB%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/</guid>
             <title>很想努力拼命一把，但没有动力坚持下去怎么办？</title>
-            <link>http://example.com/2021/03/22/%E5%BE%88%E6%83%B3%E5%8A%AA%E5%8A%9B%E6%8B%BC%E5%91%BD%E4%B8%80%E6%8A%8A%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89%E5%8A%A8%E5%8A%9B%E5%9D%9A%E6%8C%81%E4%B8%8B%E5%8E%BB%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/</link>
+            <link>https://xmengnet.github.io/2021/03/22/%E5%BE%88%E6%83%B3%E5%8A%AA%E5%8A%9B%E6%8B%BC%E5%91%BD%E4%B8%80%E6%8A%8A%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89%E5%8A%A8%E5%8A%9B%E5%9D%9A%E6%8C%81%E4%B8%8B%E5%8E%BB%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/</link>
             <pubDate>Mon, 22 Mar 2021 16:50:57 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;作者：KnowYourself&lt;br&gt;链接：&lt;a href=&#34;https://www.zhihu.com/question/279782476/answer/884327988&#34;&gt;https://www.zhihu.com/question/279782476/answer/884327988&lt;/a&gt;&lt;br&gt;来源：知乎&lt;br&gt;著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://blog-1256425412.cos.ap-chengdu.myqcloud.com/blog/download.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://blog-1256425412.cos.ap-chengdu.myqcloud.com/blog/download.jpg&#34;  &gt;&lt;span class=&#34;image-caption&#34;&gt;download&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;遗憾的是，我们想要的生活，通常都没有办法通过“努力一把”就会实现&lt;/strong&gt;。事实上，世界上很多的美好珍贵、有价值的理想和渴望都无法一蹴而就。&lt;/p&gt;
 &lt;p&gt;或许题主需要做的，是调整自己的思维，不要陷入“拼命努力一把就能实现生活的改变”的想法之中，&lt;strong&gt;与此纠结能否拼命努力一把，不如去想想如何在更长的时间里、通过持之以恒的努力来实现自己的梦想，改变自己的人生&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;因为对大部分人来说，更能带来人生改变的是自律的能力。自律可以帮助我们更自主进行目标管理，克服拖延行为，养成努力的、同时适合自己的生活态度和行为习惯。&lt;/p&gt;
@@ -38,21 +38,21 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2021/03/22/hello-world/</guid>
+            <guid isPermalink="true">https://xmengnet.github.io/2021/03/22/hello-world/</guid>
             <title>Hello World</title>
-            <link>http://example.com/2021/03/22/hello-world/</link>
+            <link>https://xmengnet.github.io/2021/03/22/hello-world/</link>
             <pubDate>Mon, 22 Mar 2021 16:43:15 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;Quick-Start&#34;&gt;&lt;a href=&#34;#Quick-Start&#34; class=&#34;headerlink&#34; title=&#34;Quick Start&#34;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&#34;Create-a-new-post&#34;&gt;&lt;a href=&#34;#Create-a-new-post&#34; class=&#34;headerlink&#34; title=&#34;Create a new post&#34;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ hexo new &lt;span class=&#34;string&#34;&gt;&amp;quot;My New Post&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;Quick-Start&#34;&gt;&lt;a href=&#34;#Quick-Start&#34; class=&#34;headerlink&#34; title=&#34;Quick Start&#34;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&#34;Create-a-new-post&#34;&gt;&lt;a href=&#34;#Create-a-new-post&#34; class=&#34;headerlink&#34; title=&#34;Create a new post&#34;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs bash&#34;&gt;$ hexo new &lt;span class=&#34;hljs-string&#34;&gt;&amp;quot;My New Post&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/writing.html&#34;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;Run-server&#34;&gt;&lt;a href=&#34;#Run-server&#34; class=&#34;headerlink&#34; title=&#34;Run server&#34;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;Run-server&#34;&gt;&lt;a href=&#34;#Run-server&#34; class=&#34;headerlink&#34; title=&#34;Run server&#34;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs bash&#34;&gt;$ hexo server&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/server.html&#34;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;Generate-static-files&#34;&gt;&lt;a href=&#34;#Generate-static-files&#34; class=&#34;headerlink&#34; title=&#34;Generate static files&#34;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;Generate-static-files&#34;&gt;&lt;a href=&#34;#Generate-static-files&#34; class=&#34;headerlink&#34; title=&#34;Generate static files&#34;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs bash&#34;&gt;$ hexo generate&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/generating.html&#34;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;Deploy-to-remote-sites&#34;&gt;&lt;a href=&#34;#Deploy-to-remote-sites&#34; class=&#34;headerlink&#34; title=&#34;Deploy to remote sites&#34;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;Deploy-to-remote-sites&#34;&gt;&lt;a href=&#34;#Deploy-to-remote-sites&#34; class=&#34;headerlink&#34; title=&#34;Deploy to remote sites&#34;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs bash&#34;&gt;$ hexo deploy&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
  ]]></description>
