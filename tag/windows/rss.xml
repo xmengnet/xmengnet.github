@@ -1,19 +1,21 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>心夢博客 • Posts by &#34;linux,windows&#34; tag</title>
+        <title>心夢博客 • Posts by &#34;windows&#34; tag</title>
         <link>https://xmengnet.github.io</link>
         <description></description>
         <language>en</language>
         <pubDate>Mon, 22 Mar 2021 18:07:31 +0800</pubDate>
         <lastBuildDate>Mon, 22 Mar 2021 18:07:31 +0800</lastBuildDate>
-        <category>Linux Nginx</category>
-        <category>linux,windows</category>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>windows</category>
+        <category>美文</category>
         <item>
             <guid isPermalink="true">https://xmengnet.github.io/2021/03/22/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%BF%AE%E5%A4%8Dwindows%E5%BC%95%E5%AF%BC/</guid>
             <title>双系统修复windows引导</title>
             <link>https://xmengnet.github.io/2021/03/22/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%BF%AE%E5%A4%8Dwindows%E5%BC%95%E5%AF%BC/</link>
-            <category>linux,windows</category>
+            <category>windows</category>
             <pubDate>Mon, 22 Mar 2021 18:07:31 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;最近尝试安装ArchLinux了，结果一时手贱把windows的esp也就是efi分区格式化了，试了各种办法修复都没成功，研究了一整天才在下午慢慢有了头绪，下面借鉴一些网上的资料讲解一下我的修复过程！&lt;/p&gt;

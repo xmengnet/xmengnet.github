@@ -1,16 +1,23 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://xmengnet.github.io</id>
-    <title>心夢博客 • Posts by &#34;linux nginx&#34; tag</title>
-    <link href="https://xmengnet.github.io" />
-    <updated>2021-03-22T11:31:51.000Z</updated>
-    <category term="Linux Nginx" />
-    <category term="linux,windows" />
-    <entry>
-        <id>https://xmengnet.github.io/2021/03/22/Arch%E6%90%AD%E5%BB%BANginx-MariaDB-PHP%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/</id>
-        <title>Arch搭建Nginx+MariaDB+PHP及其配置</title>
-        <link rel="alternate" href="https://xmengnet.github.io/2021/03/22/Arch%E6%90%AD%E5%BB%BANginx-MariaDB-PHP%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/"/>
-        <content type="html">&lt;h2 id=&#34;写在前面&#34;&gt;&lt;a href=&#34;#写在前面&#34; class=&#34;headerlink&#34; title=&#34;写在前面&#34;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt; 最近在阿里云上新买了一个服务器，想换个风格，不想使用&lt;code&gt;Centos&lt;/code&gt;或者&lt;code&gt;Debian&lt;/code&gt;，想试试&lt;code&gt;Arch&lt;/code&gt;做服务器，由于阿里云没有&lt;code&gt;Arch&lt;/code&gt;系统，所以先在&lt;code&gt;Github&lt;/code&gt;上使用&lt;a href=&#34;https://github.com/xmengnet/vps2arch&#34;&gt;vps2arch&lt;/a&gt;转换成Arch系统。&lt;/p&gt;
+<rss version="2.0">
+    <channel>
+        <title>心夢博客 • Posts by &#34;linux&#34; tag</title>
+        <link>https://xmengnet.github.io</link>
+        <description></description>
+        <language>en</language>
+        <pubDate>Mon, 22 Mar 2021 19:31:51 +0800</pubDate>
+        <lastBuildDate>Mon, 22 Mar 2021 19:31:51 +0800</lastBuildDate>
+        <category>Linux</category>
+        <category>Python</category>
+        <category>windows</category>
+        <category>美文</category>
+        <item>
+            <guid isPermalink="true">https://xmengnet.github.io/2021/03/22/Arch%E6%90%AD%E5%BB%BANginx-MariaDB-PHP%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/</guid>
+            <title>Arch搭建Nginx+MariaDB+PHP及其配置</title>
+            <link>https://xmengnet.github.io/2021/03/22/Arch%E6%90%AD%E5%BB%BANginx-MariaDB-PHP%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/</link>
+            <category>Linux</category>
+            <pubDate>Mon, 22 Mar 2021 19:31:51 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;写在前面&#34;&gt;&lt;a href=&#34;#写在前面&#34; class=&#34;headerlink&#34; title=&#34;写在前面&#34;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt; 最近在阿里云上新买了一个服务器，想换个风格，不想使用&lt;code&gt;Centos&lt;/code&gt;或者&lt;code&gt;Debian&lt;/code&gt;，想试试&lt;code&gt;Arch&lt;/code&gt;做服务器，由于阿里云没有&lt;code&gt;Arch&lt;/code&gt;系统，所以先在&lt;code&gt;Github&lt;/code&gt;上使用&lt;a href=&#34;https://github.com/xmengnet/vps2arch&#34;&gt;vps2arch&lt;/a&gt;转换成Arch系统。&lt;/p&gt;
 &lt;p&gt;使用方法也简单，下载&lt;code&gt;vps2arch&lt;/code&gt;那个文件，然后使用&lt;/p&gt;
 &lt;figure class=&#34;highlight jboss-cli&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs jboss-cli&#34;&gt;chmod +x vps2arch2&lt;br&gt;&lt;span class=&#34;hljs-string&#34;&gt;./vps2arch2&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
@@ -68,8 +75,7 @@
 &lt;p&gt;参考网站：&lt;a href=&#34;https://www.ycmbcd.com/blog/html/15778576279282.html&#34;&gt;https://www.ycmbcd.com/blog/html/15778576279282.html&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;                https://www.jianshu.com/p/4466e0cd0bd1
 &lt;/code&gt;&lt;/pre&gt;
-</content>
-        <category term="Linux Nginx" />
-        <updated>2021-03-22T11:31:51.000Z</updated>
-    </entry>
-</feed>
+ ]]></description>
+        </item>
+    </channel>
+</rss>
